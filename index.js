@@ -14,8 +14,9 @@ const razorpay = new Razorpay({
 app.use(cors());
 app.use(express.json());
 app.use("/product",express.static("product"));
-
-const url = "mongodb://localhost:27017";
+const url ="mongodb+srv://yogi2006kumar_db_user:ZRHooR1Lx9cN4nSf@cluster0.abcde.mongodb.net/myDatabase?retryWrites=true&w=majority";
+// const url ="mongodb+srv://yogi2006kumar_db_user:ZRHooR1Lx9cN4nSf@cluster0.xxxxx.mongodb.net/myDatabase";
+// ";
 const client = new MongoClient(url);
 
 let db;
