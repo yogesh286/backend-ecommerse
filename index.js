@@ -46,10 +46,17 @@ const product = multer({ storage:storage})
 
 // REGISTER API
 app.post("/api/reg", async (req, res) => {
-
   try {
+    console.log("BODY:", req.body); // 🔥 debug
 
     const { name, email, password } = req.body;
+
+    // ✅ validation
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "All fields are required"
+      });
+    }
 
     const lowerEmail = email.toLowerCase();
 
@@ -61,7 +68,7 @@ app.post("/api/reg", async (req, res) => {
       return res.status(400).json({
         message: "Email already registered"
       });
-    }w
+    }
 
     const result = await db.collection("register").insertOne({
       name,
@@ -75,13 +82,11 @@ app.post("/api/reg", async (req, res) => {
     });
 
   } catch (error) {
-
+    console.log("🔥 ERROR:", error); // VERY IMPORTANT
     res.status(500).json({
       message: "Server error"
     });
-
   }
-
 });
 
 
@@ -254,12 +259,8 @@ app.post("/api/verify-payment", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3004;
 
 app.listen(PORT, () => {
-  console.log("Server running");
-});
-
-app.listen(3004, () => {
-  console.log("Server running on http://localhost:3004");
+  console.log(`Server running on port ${PORT}`);
 });
