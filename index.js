@@ -32,6 +32,10 @@ app.get("/", (req, res) => {
   res.send("Server Running");
 });
 
+app.get("/ping", (req, res) => {
+  res.send("Server is alive 🚀");
+});
+
 const storage = multer.diskStorage({
   destination:function(req,file,cb){
     cb(null,"product/");
